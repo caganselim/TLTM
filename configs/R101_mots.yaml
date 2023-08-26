@@ -1,0 +1,43 @@
+_BASE_: "Base-CenterMask-ResNet.yaml"
+
+OUTPUT_DIR: "output/R101_mots"
+
+
+MODEL:
+  #WEIGHTS: "checkpoints/base_models/R101_mapillary.pth" # Base model
+  WEIGHTS: "checkpoints/r101_mots_final.pth" # Trained model
+
+  RESNETS:
+    DEPTH: 101
+  FCOS:
+    NUM_CLASSES: 2
+  ROI_HEADS:
+    NUM_CLASSES: 2
+
+SOLVER:
+  CHECKPOINT_PERIOD: 1000
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.0005  # Note that RetinaNet uses a different default learning rate
+  STEPS: (3000, 4000)
+  MAX_ITER: 5000
+  WARMUP_ITERS: 100
+
+DATASETS:
+  DATASET_DIR : "datasets/KITTI_MOTS/training"
+  TRAIN: ("kitti_mots_train",)
+  TEST: ("kitti_mots_test",)
+  TRN_JSON_PATH: "datasets/jsons/kitti_mots/kitti_mots_train.json"
+  VAL_JSON_PATH: "datasets/jsons/kitti_mots/kitti_mots_val.json"
+  TRN_LOADER_MODE :  "double"
+  DATASET_NAME: "kitti_mots"
+  PADDED_SAMPLING: True
+
+MASKGNN:
+  POSTPROCESSING:
+    FORGET_MODE: True
+    NUM_MISSES_TO_FORGET: 3
+  #EVAL_TYPE: "debug_writer"
+  EVAL_TYPE: "kitti_mots_writer"
+  SCORE_THRESH_TEST: 0.4
+  NODE_REP:
+    FRAME1_SRC: "proposal"

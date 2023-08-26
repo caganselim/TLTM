@@ -1,0 +1,14 @@
+_BASE_: "Base-CenterMask-ResNet.yaml"
+
+OUTPUT_DIR: "output/R50_baseline"
+
+MODEL:
+  RESNETS:
+    DEPTH: 50
+  WEIGHTS: "checkpoints/base_models/R50_all.pth"
+  RESFUSER:
+    MODE: "off"
+  GNN:
+    IS_ON: False
+  MATCHER:
+    COEF: [ 0. , 1.5, 2.5, 10. ]

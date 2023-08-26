@@ -1,0 +1,15 @@
+_BASE_: "Base-CenterMask-ResNet.yaml"
+OUTPUT_DIR: "output/R101_ytvis_baseline"
+
+MODEL:
+  WEIGHTS: "checkpoints/base_models/R101_all.pth"
+  RESNETS:
+    DEPTH: 101
+
+SOLVER:
+  CHECKPOINT_PERIOD: 5000
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.001
+  STEPS: (20000, 30000)
+  MAX_ITER: 40000
+  WARMUP_ITERS: 1000

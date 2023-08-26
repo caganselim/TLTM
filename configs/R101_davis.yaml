@@ -1,0 +1,36 @@
+_BASE_: "Base-CenterMask-ResNet.yaml"
+OUTPUT_DIR: "output/R101_DAVIS"
+
+MODEL:
+  RESNETS:
+    DEPTH: 101
+  GNN:
+    MP_ITERS: 1
+  MATCHER:
+    COEF: [ 1.25 , 1.0, 2.0, 10. ] 
+  WEIGHTS: "checkpoints/trained_models/R101_final.pth"
+  RESFUSER:
+    IS_ON : True
+
+DATASETS:
+  TRAIN: ("davis17_train",)
+  TEST: ("davis17_test",)
+  DATASET_DIR: "datasets/DAVIS/JPEGImages/480p"
+  DATASET_NAME: "davis17"
+  TRN_JSON_PATH: "datasets/jsons/davis17/davis17_train.json"
+  VAL_JSON_PATH: "datasets/jsons/davis17/davis17_val.json"
+  #VAL_JSON_PATH: "datasets/jsons/davis17/davis17_test-dev.json"
+
+SOLVER:
+  CHECKPOINT_PERIOD: 5000
+  IMS_PER_BATCH: 8
+  BASE_LR: 0.001
+  STEPS: (20000, 30000)
+  MAX_ITER: 40000
+  WARMUP_ITERS: 1000
+
+MASKGNN:
+  SCORE_THRESH_TEST: 0.25
+  EVAL_TYPE: "uvos_writer"
+
+

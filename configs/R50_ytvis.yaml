@@ -1,0 +1,29 @@
+_BASE_: "Base-CenterMask-ResNet.yaml"
+
+OUTPUT_DIR: "output/R50_ytvis"
+
+MODEL:
+  GNN:
+    MP_ITERS: 1
+  MATCHER:
+    COEF: [ 0.5 , 1.5, 2.5, 10. ] # v9
+  WEIGHTS: "checkpoints/trained_models/R50_final.pth"
+  RESFUSER:
+    IS_ON : True
+
+SOLVER:
+  CHECKPOINT_PERIOD: 5000
+  IMS_PER_BATCH: 2
+  BASE_LR: 0.0005  # Note that RetinaNet uses a different default learning rate
+  STEPS: (100000, 150000)
+  MAX_ITER: 180000
+  WARMUP_ITERS: 1000
+
+DATASETS:
+
+  PADDED_SAMPLING: True
+
+MASKGNN:
+  SCORE_THRESH_TEST: 0.05
+  NODE_REP:
+    FRAME1_SRC: "proposal"

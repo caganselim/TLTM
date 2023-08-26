@@ -1,0 +1,56 @@
+MODEL:
+  META_ARCHITECTURE: "CenterMaskGNN"
+  BACKBONE:
+    NAME: "build_fcos_resnet_fpn_backbone"
+  RESNETS:
+    OUT_FEATURES: ["res3", "res4", "res5"]
+  FPN:
+    IN_FEATURES: ["res3", "res4", "res5"]
+  PROPOSAL_GENERATOR:
+    NAME: "FCOS"
+  FCOS:
+    NUM_CLASSES: 40
+    POST_NMS_TOPK_TEST: 50
+  # PIXEL_MEAN: [102.9801, 115.9465, 122.7717]
+  MASK_ON: True
+  ROI_HEADS:
+    NUM_CLASSES: 40
+    NAME: "CenterROIHeads"
+    IN_FEATURES: ["p3", "p4", "p5"]
+  ROI_MASK_HEAD:
+    NAME: "SpatialAttentionMaskHead"
+    ASSIGN_CRITERION: "ratio"
+    NUM_CONV: 4
+    POOLER_RESOLUTION: 14
+  MATCHER:
+    COEF: [ 1. , 1.0, 2.0, 10. ]
+
+DATASETS:
+  TRAIN: ("ytvis_train",)
+  TEST: ("ytvis_test",)
+  TRN_LOADER_MODE: "joint"
+  DATASET_DIR: "datasets/det100/frames"
+  DATASET_NAME: "ytvis"
+  TRN_JSON_PATH:  "datasets/jsons/ytvis/ytvis_train.json"
+  VAL_JSON_PATH: "datasets/jsons/ytvis/ytvis_val.json"
+
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.01  # Note that RetinaNet uses a different default learning rate
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+
+INPUT:
+  MIN_SIZE_TRAIN: (640, 672, 704, 736, 768, 800)
+  MASK_FORMAT: "bitmask"
+  DATALOADER:
+    NUM_WORKERS: 4
+    SAMPLER_TRAIN: "JointSampler"
+
+TEST:
+  EVAL_PERIOD: 0
+
+MASKGNN:
+
+  EVAL_TYPE: "ytvis_writer"
+  SCORE_THRESH_TEST: 0.05
