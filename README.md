@@ -7,10 +7,8 @@ Please [visit this link](https://arxiv.org/abs/2210.16795) for the paper.
 [Jordi Pont-Tuset](https://jponttuset.cat),
 [Fatma Guney](https://mysite.ku.edu.tr/fguney/)
 
-![](gifs/1.gif)
-![](gifs/2.gif)
-![](gifs/3.gif)
-![](gifs/4.gif)
+![](gifs/youtubevis.gif)
+![](gifs/davis.gif)
 
 # Abstract
 
