@@ -2,15 +2,15 @@
 
 Please [visit this link](https://arxiv.org/abs/2210.16795) for the paper.
 
-[Cagan Selim Coban](https://cscoban.com)
-[Oguzhan Keskin](https://www.linkedin.com/in/oguzhan-keskin/)
-[Jordi Pont-Tuset](https://jponttuset.cat)
+[Cagan Selim Coban](https://cscoban.com),
+[Oguzhan Keskin](https://www.linkedin.com/in/oguzhan-keskin/),
+[Jordi Pont-Tuset](https://jponttuset.cat),
 [Fatma Guney](https://mysite.ku.edu.tr/fguney/)
 
-![](https://github.com/caganselim/TLTM/gifs/1.gif)
-![](https://github.com/caganselim/TLTM/gifs/2.gif)
-![](https://github.com/caganselim/TLTM/gifs/3.gif)
-![](https://github.com/caganselim/TLTM/gifs/4.gif)
+![](gifs/1.gif)
+![](gifs/2.gif)
+![](gifs/3.gif)
+![](gifs/4.gif)
 
 # Abstract
 
